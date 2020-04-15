@@ -4,17 +4,15 @@ import {
   Switch,
   Route,
   Link,
-  NavLink
+  NavLink,
 } from "react-router-dom";
 import "./style.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import facade from "./apiFacade";
-import CatFact from  "./CatFact";
-import  Pokemon from "./Pokemon";
-import UselessFact  from "./UselessFact";
-import  KanyeRest from "./KanyeRest";
-
-
+import CatFact from "./CatFact";
+import Pokemon from "./Pokemon";
+import UselessFact from "./UselessFact";
+import KanyeRest from "./KanyeRest";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -24,7 +22,7 @@ export default function App() {
     setLoggedIn(false);
   };
   const login = (user, pass) => {
-    facade.login(user, pass).then(res => setLoggedIn(true));
+    facade.login(user, pass).then((res) => setLoggedIn(true));
   };
   return (
     <Router>
@@ -118,14 +116,14 @@ function LogIn({ login }) {
   const init = { username: "", password: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
 
-  const performLogin = evt => {
+  const performLogin = (evt) => {
     evt.preventDefault();
     login(loginCredentials.username, loginCredentials.password);
   };
-  const onChange = evt => {
+  const onChange = (evt) => {
     setLoginCredentials({
       ...loginCredentials,
-      [evt.target.id]: evt.target.value
+      [evt.target.id]: evt.target.value,
     });
   };
 
@@ -144,7 +142,7 @@ function LoggedIn() {
   const [dataFromServer, setDataFromServer] = useState("Loading...");
 
   useEffect(() => {
-    facade.fetchData().then(data => setDataFromServer(data.msg));
+    facade.fetchData().then((data) => setDataFromServer(data.msg));
   }, []);
 
   return (
