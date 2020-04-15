@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/securitystarter";
+const URL = "http://localhost:8080/CA3";
 
 function handleHttpErrors(res) {
   if (!res.ok) {
