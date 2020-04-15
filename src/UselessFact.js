@@ -1,45 +1,32 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 
 import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
-function UselessFact(){
-    const[uselessFact, setUselessFact] = useState();
+export default function UselessFact(){
+    const[data, setData] = useState([]);
+
+    
+    
+     useEffect(()=>{
+        const fetchData = fetch("http://localhost:8080/CA3/api/uselessfact")
+    .then((res) => res.json())
+    .then((data) =>  setData(data))
+    .catch((err) => console.log("fejl"))
+    console.log(data)
+      }, []);      
     
 
-    function getUselessFact(){
-        let options = {
-          'method': 'GET',
-          'headers': {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        }
-        fetch("http://localhost:8080/CA3/api/uselessfact", options)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      setUselessFact(data.text);
-      
-    });
-  }
-
-  function callUselessFact(){
-    return (uselessFact ? (<>
-    <h3>Useless Fact:</h3>
-    <i>{uselessFact}</i>
-    </>):(<></>));
-  }
-
-
-  return (
-    <div className="UselessFact">
-      {callUselessFact()}
-      <br></br>
-      <button onClick={getUselessFact}>Get a new Useless Fact</button>
-    </div>
-  );
-}
     
-export default UselessFact;
+    return (
+        <div className="container">
+          <div  className="jumbotron">
+            <h1 className="display-4 text-primary">Heres a useless fact</h1>
+            <p  className="font-weight-bold">{data.text}</p>
+          </div>
+        </div>
+      );
+
+
+  };
