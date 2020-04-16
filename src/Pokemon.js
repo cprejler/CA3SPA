@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 
+
 import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import facade from "./apiFacade";
@@ -18,19 +19,13 @@ function Pokemon() {
   function getPokemon() {
     let pokemonID = document.getElementById("pokemonID").value; 
     let options = facade.makeOptions("GET", true)
-  /*  let options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      }, 
-    };*/
     fetch("http://localhost:8080/CA3/api/pokemon/"+ pokemonID, options)
       .then((res) => res.json())
       .then((data) => {
         setPokemonName(data.name);
         setPokemonID(data.id);
-        setPokemonType(data.types[0].type.name);
+       let pokemontype = getPokemonTypes(data) ; 
+        setPokemonType(pokemontype);
         console.log(data)
       }, []);
   }
@@ -43,6 +38,8 @@ function Pokemon() {
         <h4>Pokemon ID: {pokemonID}</h4>
         <h4>Pokemon Name: {pokemonName}</h4>
         <h4>Pokemon Type: {pokemonType}</h4>
+        
+
       </>
     ) : (
       <></>
@@ -60,4 +57,14 @@ function Pokemon() {
 
     </div>
   );
+}
+
+
+function getPokemonTypes (data) {
+  
+  let pokemontype = ""
+  for (let i = 0 ; i < Object.keys(data.types).length ; i++) {  
+    pokemontype = pokemontype + data.types[i].type.name + ", "
+  }
+  return  pokemontype
 }
