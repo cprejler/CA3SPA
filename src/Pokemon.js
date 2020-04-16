@@ -16,6 +16,7 @@ function Pokemon() {
 
 
   function getPokemon() {
+    let pokemonID = document.getElementById("pokemonID").value; 
     let options = {
       method: "GET",
       headers: {
@@ -23,7 +24,7 @@ function Pokemon() {
         Accept: "application/json",
       },
     };
-    fetch("http://localhost:8080/CA3/api/pokemon/1", options)
+    fetch("http://localhost:8080/CA3/api/pokemon/"+ pokemonID, options)
       .then((res) => res.json())
       .then((data) => {
         setPokemonName(data.name);
@@ -51,8 +52,10 @@ function Pokemon() {
     <div className="App">
       {pokemonfact()}
       <br />
-
+     
+      <input type="number" id="pokemonID" name="pokemonInput" placeholder="insert pokemon id"></input>
       <button onClick={getPokemon}>Get Pokemon</button>
+
     </div>
   );
 }
