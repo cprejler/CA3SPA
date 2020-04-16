@@ -16,28 +16,41 @@ function Pokemon() {
 
 
 
+
   function getPokemon() {
     let pokemonID = document.getElementById("pokemonID").value; 
     let options = facade.makeOptions("GET", true)
     fetch("http://localhost:8080/CA3/api/pokemon/"+ pokemonID, options)
       .then((res) => res.json())
       .then((data) => {
-        setPokemonName(data.name);
-        setPokemonID(data.id);
-       let pokemontype = getPokemonTypes(data) ; 
-        setPokemonType(pokemontype);
-        console.log(data)
+
+        
+        if(data.code != "403") {
+          setPokemonName(data.name);
+          setPokemonID(data.id);
+          let pokemontype = getPokemonTypes(data) ; 
+          setPokemonType(pokemontype);
+          pokemonfact(); 
+        } else {
+          pokemonfact();   
+        }
+    
+
       }, []);
   }
 
   function pokemonfact() {
+
     
     return pokemonName ? (
       <>
+
         <h1>Pokemon info:</h1>
         <h4>Pokemon ID: {pokemonID}</h4>
         <h4>Pokemon Name: {pokemonName}</h4>
         <h4>Pokemon Type: {pokemonType}</h4>
+      
+
         
 
       </>
@@ -61,10 +74,13 @@ function Pokemon() {
 
 
 function getPokemonTypes (data) {
+
+  while (Object.keys(data) != null ) {
   
   let pokemontype = ""
   for (let i = 0 ; i < Object.keys(data.types).length ; i++) {  
     pokemontype = pokemontype + data.types[i].type.name + ", "
   }
   return  pokemontype
+}
 }
