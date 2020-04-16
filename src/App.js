@@ -33,21 +33,29 @@ export default function App() {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink exact activeClassName="active" to="/catfacts">
-              CatFact
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact activeClassName="active" to="/pokemon">
-              Pokemon
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact activeClassName="active" to="/uselessfact">
-              UselessFact
-            </NavLink>
-          </li>
+          {loggedIn && (
+            <React.Fragment>
+            <li>
+              <NavLink exact activeClassName="active" to="/catfacts">
+                CatFact
+              </NavLink>
+            </li>
+            <li>
+              <NavLink exact activeClassName="active" to="/pokemon">
+                Pokemon
+              </NavLink>
+            </li>
+            <li>
+              <NavLink exact activeClassName="active" to="/uselessfact">
+                UselessFact
+              </NavLink>
+            </li>
+  
+            </React.Fragment>
+            
+          )}
+          
+         
           <li>
             <NavLink exact activeClassName="active" to="/kanyerest">
               KanyeRest
@@ -107,7 +115,12 @@ export default function App() {
 function Home() {
   return (
     <div>
-      <h2>Home</h2>
+      <div className="container">
+      <h2>Hello World</h2>
+      <h3>Please login to see our  awesome stuff</h3>
+      </div>
+      
+      
     </div>
   );
 }
