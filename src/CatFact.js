@@ -5,9 +5,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import facade from "./apiFacade";
 
 export default function CatFact() {
+
+  const options  = facade.makeOptions("GET", true);
   const [data, setData] = useState([]);
   useEffect(() => {
-    const fetchData = fetch("http://localhost:8080/CA3/api/catfact")
+    const fetchData = fetch("http://localhost:8080/CA3/api/catfact",  options)
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.log("UPPS"));
