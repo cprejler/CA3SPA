@@ -23,7 +23,7 @@ export default function KanyeRest(){
         <div className="container">
           <div  className="jumbotron">
             <h1 className="display-4 text-primary">Heres a useless fact</h1>
-            <p  className="font-weight-bold">{data.qoute}</p>
+            <p  className="font-weight-bold">{data.quote}</p>
           </div>
         </div>
       );
