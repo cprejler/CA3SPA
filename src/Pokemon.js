@@ -16,14 +16,16 @@ function Pokemon() {
 
 
   function getPokemon() {
-    let options = {
+    let pokemonID = document.getElementById("pokemonID").value; 
+    let options = facade.makeOptions("GET", true)
+  /*  let options = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-      },
-    };
-    fetch("http://localhost:8080/CA3/api/pokemon/1", options)
+      }, 
+    };*/
+    fetch("http://localhost:8080/CA3/api/pokemon/"+ pokemonID, options)
       .then((res) => res.json())
       .then((data) => {
         setPokemonName(data.name);
@@ -49,10 +51,13 @@ function Pokemon() {
 
   return (
     <div className="App">
-      {pokemonfact()}
+    
       <br />
-
+     
+      <input type="number" id="pokemonID" name="pokemonInput" placeholder="Between 1 and 807"></input>
       <button onClick={getPokemon}>Get Pokemon</button>
+      {pokemonfact()}
+
     </div>
   );
 }
